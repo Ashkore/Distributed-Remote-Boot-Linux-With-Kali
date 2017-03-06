@@ -23,45 +23,48 @@ else
     $first3 = $ip1+"."+$ip2+"."+$ip3
     $network = $first3+".0"
     $broadcast = $first3+".255"
+
+    aa
+
+
+
+    #Start of Networking setup
+    echo "#THE DRBL ENVIRONMENT" >> /etc/network/interfaces
+    echo "#This interface is for the NIC pointing to the DRBL network."
+
+    echo "allow-hotplug $1" >> /etc/network/interfaces
+    echo "iface $1 inet static" >> /etc/network/interfaces
+    echo "address $2" >> /etc/network/interfaces
+    echo "netmask 255.255.225.0" >> /etc/network/interfaces
+    echo "network $network" >> /etc/network/interfaces
+    echo "broadcast $broadcast" >> /etc/network/interfaces
+    echo "gateway $3" >> /etc/network/interfaces
+    #End of Networking setup
+    service networking restart
+
+    echo "deb http://ftp.us.debian.org/debian/ jessie main" >> /etc/apt/sources.list
+    echo "deb http://free.nchc.org.tw/drbl-core drbl stable" >> /etc/apt/sources.list
+    apt-get update -y && apt-get upgrade -y
+    apt-get install drbl
+
+    ###TOBECONFIGUERED
+
+
+    #I was required to put the OS "CD" back in.
+    printf 'N\nN\nN\n1\n' | drblsrv -i
+    ###REDO THIS
+    Setup FULL DRBL mode [0]
+    Setup I do not want clonezilla[2]
+    No to swapspace on thick client HDD
+    graphic mode??? [1]
+    normal login[0]
+    security [n]
+    pxe security[n]
+    set boot prompt[y]
+    how many [100]
+    graphic background[y]
+    usb stuff[y]
+    ip stuff[n]
+    terminal mode[n]
+    nat server[y]
 fi
-
-
-#Start of Networking setup
-echo "#THE DRBL ENVIRONMENT" >> /etc/network/interfaces
-echo "#This interface is for the NIC pointing to the DRBL network."
-
-echo "allow-hotplug $1" >> /etc/network/interfaces
-echo "iface $1 inet static" >> /etc/network/interfaces
-echo "address $2" >> /etc/network/interfaces
-echo "netmask 255.255.225.0" >> /etc/network/interfaces
-echo "network $network" >> /etc/network/interfaces
-echo "broadcast $broadcast" >> /etc/network/interfaces
-echo "gateway $3" >> /etc/network/interfaces
-#End of Networking setup
-service networking restart
-
-echo "deb http://ftp.us.debian.org/debian/ jessie main" >> /etc/apt/sources.list
-echo "deb http://free.nchc.org.tw/drbl-core drbl stable" >> /etc/apt/sources.list
-apt-get update -y && apt-get upgrade -y
-apt-get install drbl
-
-###TOBECONFIGUERED
-
-
-#I was required to put the OS "CD" back in.
-printf 'N\nN\nN\n1\n' | drblsrv -i
-###REDO THIS
-Setup FULL DRBL mode [0]
-Setup I do not want clonezilla[2]
-No to swapspace on thick client HDD
-graphic mode??? [1]
-normal login[0]
-security [n]
-pxe security[n]
-set boot prompt[y]
-how many [100]
-graphic background[y]
-usb stuff[y]
-ip stuff[n]
-terminal mode[n]
-nat server[y]
