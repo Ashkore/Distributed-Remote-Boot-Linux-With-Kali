@@ -1,37 +1,37 @@
-## Welcome to GitHub Pages
+# DRBL Documentation
 
-You can use the [editor on GitHub](https://github.com/Ashkore/Distributed-Remote-Boot-Linux-With-Kali/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+##Tools
 ```
+VMware Workstation
+Kali Linux 64 Bit 2016.2 OS 
+```
+##Working Client OS's/Config Required
+```
+None ATM
+```
+##Info
+The idea is to set up a DRBL virtual server and then create clients to boot off the server. The server will be Debian and I want to try to create multiple OS's for the clients to boot from. 
+##Server Steps
+###1. Install the Server Os
+```
+Created a virtual server with:
+    RAM: 4GB
+    HDD: 100GB
+    CPU: 2
+    OS: Kali Linux 64 Bit 2016.2 OS 
+    Nic1: NAT/ Or pointing to the Public Internet
+    Nic2: Host Only/ Custom NIC / Or pointing to the NIC of the DRBL environment.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Followed Default Steps to install the os.
+root:toor
+```
+I take a snapshot here since it is a virtual machine. [Fresh Install]
+###2. Script to install packages
+```
+#Format
+#./bash.sh (Network pointing to DRBL ENV) (IP address of DRBL ENV NIC) (Gateway of DRBL ENV)
 
-### Jekyll Themes
+./bash.sh eth1 192.168.111.2 192.168.111.1
+```
+#!!!!!Stopped on step 3!!!!!
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Ashkore/Distributed-Remote-Boot-Linux-With-Kali/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
