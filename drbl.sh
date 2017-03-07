@@ -20,18 +20,14 @@ if [ -z $ip1 ] || [ -z $ip2 ] || [ -z $ip3 ] || [ -z $ip4 ]; then
     echo "ERROR: Incorrect Parameter 2\nIP address does not have 4 octets."
     break;
 else
-    $first3 = $ip1+"."+$ip2+"."+$ip3
-    $network = $first3+".0"
-    $broadcast = $first3+".255"
-
-    aa
-
-
+    first3=$ip1"."$ip2"."$ip3
+    network=$first3".0"
+    broadcast=$first3".255"
 
     #Start of Networking setup
+    echo "Starting: Setting up the /etc/network/interfaces File."
     echo "#THE DRBL ENVIRONMENT" >> /etc/network/interfaces
-    echo "#This interface is for the NIC pointing to the DRBL network."
-
+    echo "#This interface is for the NIC pointing to the DRBL network." >> /etc/network/interfaces
     echo "allow-hotplug $1" >> /etc/network/interfaces
     echo "iface $1 inet static" >> /etc/network/interfaces
     echo "address $2" >> /etc/network/interfaces
@@ -39,18 +35,30 @@ else
     echo "network $network" >> /etc/network/interfaces
     echo "broadcast $broadcast" >> /etc/network/interfaces
     echo "gateway $3" >> /etc/network/interfaces
+    echo "Finished: Setting up the /etc/network/interfaces File."
     #End of Networking setup
+    echo "Starting: Restarting networking service."
     service networking restart
+    echo "Finished: Restarting networking service."
 
+    #Start of Repository setup
+    echo "Starting: Setting up /etc/apt/sources.list File"
     echo "deb http://ftp.us.debian.org/debian/ jessie main" >> /etc/apt/sources.list
     echo "deb http://free.nchc.org.tw/drbl-core drbl stable" >> /etc/apt/sources.list
+    echo "Finished: Setting up /etc/apt/sources.list File"
+    #End of Repository setup
+
+    #Start of Update OS
+    echo "Starting: Updating OS"
     apt-get update -y && apt-get upgrade -y
+    echo "Finished: Updating OS"
+    #End of Update OS
+
+    #Start of DRBL install
+    echo "Starting: Installing DRBL"
     apt-get install drbl
-
-    ###TOBECONFIGUERED
-
-
-    #I was required to put the OS "CD" back in.
+    echo "Finished: Installing DRBL"
+    #End of DRBL install
     printf 'N\nN\nN\n1\n' | drblsrv -i
     ###REDO THIS
     Setup FULL DRBL mode [0]

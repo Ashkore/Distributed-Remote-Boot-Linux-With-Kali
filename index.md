@@ -29,10 +29,15 @@ root:toor
 I take a snapshot here since it is a virtual machine. [Fresh Install]
 ### 2. Script to install packages
 ```
-#Format
+Download the Script
+root@kali:~# wget https://ashkore.github.io/Distributed-Remote-Boot-Linux-With-Kali/drbl.sh
+root@kali:~# chmod +x drbl.sh
 #./bash.sh (Network pointing to DRBL ENV) (IP address of DRBL ENV NIC) (Gateway of DRBL ENV)
+root@kali:~# ./bash.sh eth1 192.168.111.2 192.168.111.1
 
-./bash.sh eth1 192.168.111.2 192.168.111.1
+
+
+
 ```
 # !!!!!Stopped on step 3!!!!!
 
