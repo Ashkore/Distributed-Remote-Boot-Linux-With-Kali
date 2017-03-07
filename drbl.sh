@@ -10,17 +10,17 @@ if [ -z "$1" ]; then
     echo "${RED}ERROR: Missing Parameter 1\nNIC not defined."
     exit 0;
 elif [ -z "$2" ]; then
-    echo "${RED}ERROR: Missing Parameter 2\nIP Address of DRBL ENV NIC not defined."
+    echo -e "${RED}ERROR: Missing Parameter 2\nIP Address of DRBL ENV NIC not defined."
     exit 0;
 elif [ -z "$3" ]; then
-    echo "${RED}ERROR: Missing Parameter 3\nGateway of DRBL ENV not defined."
+    echo -e "${RED}ERROR: Missing Parameter 3\nGateway of DRBL ENV not defined."
     exit 0;
 fi
 
 #Check if IP address is an ipv4 address, if so, set the network and broadcast variables
 IFS=. read ip1 ip2 ip3 ip4 <<< $2
 if [ -z $ip1 ] || [ -z $ip2 ] || [ -z $ip3 ] || [ -z $ip4 ]; then
-    echo "${RED}ERROR: Incorrect Parameter 2\nIP address does not have 4 octets."
+    echo -e "${RED}ERROR: Incorrect Parameter 2\nIP address does not have 4 octets."
     exit 0;
 else
     first3=$ip1"."$ip2"."$ip3
@@ -28,7 +28,7 @@ else
     broadcast=$first3".255"
 
     #Start of Networking setup
-    echo "${LGreen}Starting: Setting up the /etc/network/interfaces File."
+    echo -e "${LGreen}Starting: Setting up the /etc/network/interfaces File."
     echo "#THE DRBL ENVIRONMENT" >> /etc/network/interfaces
     echo "#This interface is for the NIC pointing to the DRBL network." >> /etc/network/interfaces
     echo "allow-hotplug $1" >> /etc/network/interfaces
@@ -38,34 +38,34 @@ else
     echo "network $network" >> /etc/network/interfaces
     echo "broadcast $broadcast" >> /etc/network/interfaces
     echo "gateway $3" >> /etc/network/interfaces
-    echo "${Green}Finished: Setting up the /etc/network/interfaces File."
+    echo -e "${Green}Finished: Setting up the /etc/network/interfaces File."
     #End of Networking setup
 
-    echo "${LGreen}Starting: Restarting networking service."
+    echo -e "${LGreen}Starting: Restarting networking service."
     service networking restart
-    echo "${Green}Finished: Restarting networking service."
+    echo -e "${Green}Finished: Restarting networking service."
 
     #Start of Repository setup
-    echo "${LGreen}Starting: Setting up /etc/apt/sources.list File"
+    echo -e "${LGreen}Starting: Setting up /etc/apt/sources.list File"
     echo "deb http://ftp.us.debian.org/debian/ jessie main" >> /etc/apt/sources.list
     echo "deb http://free.nchc.org.tw/drbl-core drbl stable" >> /etc/apt/sources.list
-    echo "${Green}Finished: Setting up /etc/apt/sources.list File"
+    echo -e "${Green}Finished: Setting up /etc/apt/sources.list File"
     #End of Repository setup
 
     #Start of Update OS
-    echo "${LGreen}Starting: Updating OS"
+    echo -e "${LGreen}Starting: Updating OS"
     apt-get update -y && apt-get upgrade -y
-    echo "${Green}Finished: Updating OS"
+    echo -e "${Green}Finished: Updating OS"
     #End of Update OS
 
     #Start of DRBL install
-    echo "${LGreen}Starting: Installing DRBL"
+    echo -e "${LGreen}Starting: Installing DRBL"
     apt-get install drbl
-    echo "${Green}Finished: Installing DRBL"
+    echo -e "${Green}Finished: Installing DRBL"
     #End of DRBL install
 
     #Start of DRBL Configuration
-    echo "${LGreen}Starting: DRBL Configuration"
+    echo -e "${LGreen}Starting: DRBL Configuration"
     printf 'N\nN\nN\n1\n' | drblsrv -i
     ###REDO THIS
     Setup FULL DRBL mode [0]
@@ -83,6 +83,6 @@ else
     terminal mode[n]
     nat server[y]
 
-    echo "${LGreen}Finished: DRBL Configuration"
+    echo -e "${LGreen}Finished: DRBL Configuration"
     #End of DRBL Configuration
 fi
