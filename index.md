@@ -27,12 +27,17 @@ Followed Default Steps to install the os.
 root:toor
 ```
 I take a snapshot here since it is a virtual machine. [Fresh Install]
-### 2. Script to install packages
+### 2. Update, Upgrade and Dist-Upgrade
+```
+root@kali:~# apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y
+```
+I take a snapshot here since it is a virutal machine. [Updated]
+### 3. Script to install packages
 ```
 Download the Script
 root@kali:~# wget https://ashkore.github.io/Distributed-Remote-Boot-Linux-With-Kali/drbl.sh
 root@kali:~# chmod +x drbl.sh
-#./bash.sh (Network pointing to DRBL ENV) (IP address of DRBL ENV NIC) (Gateway of DRBL ENV)
+    #./bash.sh (Network pointing to DRBL ENV) (IP address of DRBL ENV NIC) (Gateway of DRBL ENV)
 root@kali:~# ./bash.sh eth1 192.168.111.2 192.168.111.1
 ```
 # !!!!!Stopped on step 3!!!!!
