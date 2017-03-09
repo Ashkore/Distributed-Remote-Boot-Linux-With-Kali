@@ -44,6 +44,7 @@ echo "netmask 255.255.225.0" >> /etc/network/interfaces
 echo "network $network" >> /etc/network/interfaces
 echo "broadcast $broadcast" >> /etc/network/interfaces
 echo "gateway $4" >> /etc/network/interfaces
+ifup $DRBLNic
 echo -e "${Green}Finished: Setting up the /etc/network/interfaces File."
 #End of Networking setup
 
