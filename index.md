@@ -52,7 +52,6 @@ root@kali:~# nano /etc/network/interfaces
         iface eth0 inet dhcp
  
         # The DRBL NIC
-        auto eth1
         allow-hotplug eth1
         iface eth1 inet static
             address 10.0.0.2

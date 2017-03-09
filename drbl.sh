@@ -29,11 +29,6 @@ echo -e "${Green}Finished: Installing DRBL"
 #End of DRBL install
 
 
-
-
-
-exit 0;
-
 #WORK IN PROGRESS
 echo -e "${LGreen}Starting: DRBL Configuration"
 
@@ -42,6 +37,9 @@ apt-get install drbl-chntpw freedos partclone clonezilla mkpxeinitrd-net -y --al
 printf 'N\nN\nY\n1\n' | drblsrv -i
 echo -e "${LGreen}Finished: DRBL package Installs"
 
+
+
+exit 0;
 echo -e "${LGreen}Starting: DRBL Client Setup"
 #Please Enter DNS Domain [drbl.org]
 #Please enter NIS/YP domain name [penguinzilla]
