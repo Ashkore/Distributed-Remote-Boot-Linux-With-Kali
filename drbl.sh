@@ -9,13 +9,16 @@ NC='\033[0m'
 if [ -z "$1" ]; then
     echo -e "${RED}ERROR: Missing Parameter 1\nDRBL NIC not defined."
     exit 0;
+fi
 if [ -z "$2" ]; then
     echo -e "${RED}ERROR: Missing Parameter 1\nOTHER NIC not defined."
     exit 0;
-elif [ -z "$3" ]; then
+fi
+if [ -z "$3" ]; then
     echo -e "${RED}ERROR: Missing Parameter 2\nIP Address of DRBL ENV NIC not defined."
     exit 0;
-elif [ -z "$4" ]; then
+fi
+if [ -z "$4" ]; then
     echo -e "${RED}ERROR: Missing Parameter 3\nGateway of DRBL ENV not defined."
     exit 0;
 fi
@@ -84,10 +87,7 @@ echo -e "${LGreen}Starting: DRBL Configuration"
 
 echo -e "${LGreen}Starting: DRBL package Installs"
 apt-get install drbl-chntpw freedos partclone clonezilla mkpxeinitrd-net -y --allow-unauthenticated
-printf 'N\n
-        N\n
-        Y\n
-        1\n' | drblsrv -i
+printf 'N\nN\nY\n1\n' | drblsrv -i
 echo -e "${LGreen}Finished: DRBL package Installs"
 
 echo -e "${LGreen}Starting: DRBL Client Setup"
@@ -95,45 +95,13 @@ echo -e "${LGreen}Starting: DRBL Client Setup"
 #Please enter NIS/YP domain name [penguinzilla]
 #Please enter the client hostname prefix [DRBL-Server-]
 #Public IP of this server [eth0]
-printf '\n
-        \n
-        \n
-        $OtherNIC\n
-
-        ' | drblpush -i
+echo '\n\n\n$OtherNIC\n'
+printf '\n\n\n$OtherNIC\n' | drblpush -i
 
 
 
 
 echo -e "${LGreen}Finished: DRBL Client Setup"
-
-echo -e "${LGreen}Finished: DRBL Configuration"
-
-
-
-
-
-
-
-
-#Start of DRBL Configuration
-echo -e "${LGreen}Starting: DRBL Configuration"
-printf 'N\nN\nN\n1\n' | drblsrv -i
-###REDO THIS
-Setup FULL DRBL mode [0]
-Setup I do not want clonezilla[2]
-No to swapspace on thick client HDD
-graphic mode??? [1]
-normal login[0]
-security [n]
-pxe security[n]
-set boot prompt[y]
-how many [100]
-graphic background[y]
-usb stuff[y]
-ip stuff[n]
-terminal mode[n]
-nat server[y]
 
 echo -e "${LGreen}Finished: DRBL Configuration"
 #End of DRBL Configuration
